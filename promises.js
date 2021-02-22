@@ -40,11 +40,30 @@ function createPost(post) {
 // .then(getPosts)
 // .catch(err => console.log(err));
 
+// Async await = more elegant way to handle promises
+async function init() {
+    await createPost ({title: 'Post Three', body: ' This is post three'});
+// wait for the above to be done before calling getPosts()
+
+getPosts();
+}
+init()
+
+// Async / Await with fetch: cleaner than 
+async function fetchUsers() {
+    const res = await fetch('https://jsonplaceholder.typicode.com/users');
+// fetch need to create the json file and then read it.
+    const data = await res.json();
+    console.log(data);
+}
+fetchUsers()
+
 // Promise.all 
-const promise1 = Promise.resolve('Hello World');
-const promise2 = 10;
-const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Goodbye'));
+// const promise1 = Promise.resolve('Hello World');
+// const promise2 = 10;
+// const promise3 = new Promise((resolve, reject) => setTimeout(resolve, 2000, 'Goodbye'));
 
-const promise4 = fetch('https://jsonplaceholder.typicode.com/users'); // this return a promise 
+// const promise4 = fetch('https://jsonplaceholder.typicode.com/users').then(res => res.json()); // this returns a promise - with fetch it needs 2 .then : formating to json and then the second will give the data.
 
-Promise.all([promise1,promise2, promise3]).then(values=> console.log(values));
+// Promise.all([promise1,promise2, promise3, promise4]).then((values => console.log(values)));
+
